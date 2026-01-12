@@ -48,130 +48,128 @@
                 <p class="text-sm text-slate-400 mt-2">보편적 서비스 단계 진입 완료</p>
             </div>
             <div class="card p-6 border-t-4 border-purple-500">
-                <div class="flex items-center gap-4 mb-2">
-                    <div class="p-3 bg-purple-100 rounded-lg text-purple-600"><i class="fas fa-brain fa-xl"></i></div>
-                    <h3 class="font-semibold text-slate-500 uppercase">활용 역량 점수</h3>
-                </div>
-                <div class="text-3xl stat-value">3.23 / 4.0</div>
+                <div class="fas fa-brain fa-xl mb-2 text-purple-600 p-3 bg-purple-100 rounded-lg inline-block"></div>
+                <h3 class="font-semibold text-slate-500 uppercase inline-block ml-2">활용 역량 점수</h3>
+                <div class="text-3xl stat-value mt-1">3.23 / 4.0</div>
                 <p class="text-sm text-slate-400 mt-2">역대 최고치, 질적 성장 가속화</p>
             </div>
         </div>
 
-        <!-- Section 1 & 2: Trends -->
+        <!-- Section 1: Main Trend -->
+        <div class="card p-8 mb-12">
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                <i class="fas fa-chart-area text-blue-500"></i> 연도별 인터넷 이용자 수 및 보급률 추이 (2017-2024)
+            </h2>
+            <div class="relative h-80">
+                <canvas id="mainTrendChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Section 2: Gender & Age Demographics -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             <div class="card p-8">
                 <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <i class="fas fa-signal text-blue-500"></i> 인터넷 이용자 수 및 보급률 추이
-                </h2>
-                <div class="relative h-64">
-                    <canvas id="mainTrendChart"></canvas>
-                </div>
-                <p class="mt-6 text-slate-600 text-sm leading-relaxed">
-                    2017년 95.1%였던 이용률은 매년 꾸준히 상승하여 현재 97.9%에 도달했습니다. 2022년 소폭 정체를 겪었으나 2024년 다시 성장세를 회복하며 완만한 성숙기를 유지하고 있습니다.
-                </p>
-            </div>
-
-            <div class="card p-8">
-                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <i class="fas fa-venus-mars text-pink-500"></i> 성별 이용자 격차 해소
+                    <i class="fas fa-venus-mars text-pink-500"></i> 성별 이용자 수 변화 (2017 vs 2024)
                 </h2>
                 <div class="relative h-64">
                     <canvas id="genderChart"></canvas>
                 </div>
                 <p class="mt-6 text-slate-600 text-sm leading-relaxed">
-                    여성 이용자 수가 2017년 이후 약 192만 명 증가하며 남성 증가 폭(99만 명)을 크게 상회했습니다. 이제 성별에 따른 디지털 격차는 사실상 소멸한 것으로 분석됩니다.
+                    여성 이용자가 약 192만 명 증가하며 남성 증가 폭을 상회했습니다. 2024년 현재 성별 격차는 소멸 단계입니다.
                 </p>
             </div>
-        </div>
 
-        <!-- Section 3: Silver & Competency -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div class="md:col-span-1 card p-8 bg-blue-50">
-                <h2 class="text-xl font-bold mb-4">60대 고령층의 급증</h2>
-                <div class="text-center py-6">
-                    <div class="text-sm text-slate-500 mb-1">2017년 602만 명</div>
-                    <div class="text-4xl font-bold text-blue-600 my-2">2.0배 증폭</div>
-                    <div class="text-lg font-semibold text-slate-700">2024년 1,175만 명</div>
-                </div>
-                <p class="text-sm text-slate-600 leading-relaxed mt-4">
-                    실버 세대가 전체 인터넷 인구 성장의 핵심 동력입니다. 이들을 위한 맞춤형 UX/UI 설계가 기업과 서비스의 필수 과제가 되었습니다.
-                </p>
-            </div>
-            
-            <div class="md:col-span-2 card p-8">
+            <div class="card p-8">
                 <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <i class="fas fa-star text-yellow-500"></i> 디지털 활용 역량 점수 추이 (4점 만점)
+                    <i class="fas fa-blind text-indigo-500"></i> 60대 이상 고령층 이용자 급증 추이
                 </h2>
                 <div class="relative h-64">
-                    <canvas id="skillChart"></canvas>
+                    <canvas id="seniorChart"></canvas>
                 </div>
+                <p class="mt-6 text-slate-600 text-sm leading-relaxed">
+                    2017년 이후 고령층 이용자가 약 2배 급증하며 전체 이용자 증가의 <b>핵심 엔진</b> 역할을 수행하고 있습니다.
+                </p>
             </div>
         </div>
 
-        <!-- Section 4: 2030 Prediction -->
-        <div class="card p-8 bg-slate-900 text-white mb-12">
-            <h2 class="text-2xl font-bold mb-8 text-center">2030년 대한민국 미래 예측 (Projection)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="flex flex-col justify-center items-center p-6 border border-slate-700 rounded-xl">
-                    <span class="text-slate-400 mb-2">총 이용자 수</span>
-                    <div class="flex items-baseline gap-2">
-                        <span class="text-5xl font-bold text-blue-400">5,050</span>
-                        <span class="text-xl font-semibold">만 명</span>
-                    </div>
-                    <div class="mt-4 flex items-center text-green-400 gap-1">
-                        <i class="fas fa-caret-up"></i>
-                        <span>현재 대비 약 230만 명 추가 확보</span>
-                    </div>
-                </div>
-                <div class="flex flex-col justify-center items-center p-6 border border-slate-700 rounded-xl">
-                    <span class="text-slate-400 mb-2">인터넷 이용률</span>
-                    <div class="flex items-baseline gap-2">
-                        <span class="text-5xl font-bold text-blue-400">99.9</span>
-                        <span class="text-xl font-semibold">%</span>
-                    </div>
-                    <div class="mt-4 text-center">
-                        <span class="bg-blue-900 text-blue-200 px-3 py-1 rounded text-sm font-semibold">완전 포화 및 보편적 디지털 사회</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-10 p-4 bg-slate-800 rounded-lg text-sm text-slate-400 border-l-4 border-blue-500 italic">
-                * 위 수치는 2017-2024 과거 성장 모델링을 기반으로 산출된 예측치입니다.
+        <!-- Section 3: Skill Competency -->
+        <div class="card p-8 mb-12">
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                <i class="fas fa-star text-yellow-500"></i> 디지털 정보 활용 역량 고도화 (2018-2024)
+            </h2>
+            <div class="relative h-64">
+                <canvas id="skillChart"></canvas>
             </div>
         </div>
 
-        <!-- Section 5: Conclusion -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="p-6">
+        <!-- Section 4: 2030 Prediction with Graph -->
+        <div class="card p-8 bg-slate-900 text-white mb-12 relative overflow-hidden">
+            <h2 class="text-2xl font-bold mb-2 text-center text-blue-400">2030 Future Outlook</h2>
+            <p class="text-center text-slate-400 mb-8">과거 데이터를 기반으로 한 2030년 이용자 수 시뮬레이션</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Prediction Stats -->
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="p-6 border border-slate-700 rounded-xl bg-slate-800/50">
+                        <span class="text-slate-400 text-sm">2030 예상 이용자 수</span>
+                        <div class="text-4xl font-bold text-white mt-1">5,050만 명</div>
+                        <div class="mt-2 text-green-400 text-xs font-semibold uppercase tracking-wider">+4.8% 성장 예측</div>
+                    </div>
+                    <div class="p-6 border border-slate-700 rounded-xl bg-slate-800/50">
+                        <span class="text-slate-400 text-sm">2030 예상 이용률</span>
+                        <div class="text-4xl font-bold text-white mt-1">99.9%</div>
+                        <div class="mt-2 text-blue-300 text-xs font-semibold uppercase tracking-wider">전국민 디지털 통합</div>
+                    </div>
+                </div>
+                
+                <!-- Prediction Chart -->
+                <div class="lg:col-span-2 p-6 border border-slate-700 rounded-xl bg-slate-800/30">
+                    <h3 class="text-sm font-semibold mb-4 text-slate-300">이용자 수 예측 모델 (2017 - 2030)</h3>
+                    <div class="relative h-64">
+                        <canvas id="predictionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-4 bg-blue-900/20 rounded-lg text-xs text-blue-300/80 border border-blue-800/30">
+                <i class="fas fa-info-circle mr-1"></i> 예측 모델은 2017-2024년 연평균 성장률(CAGR) 및 인구 구조 변화 추이를 반영한 선형 회귀 분석 결과입니다.
+            </div>
+        </div>
+
+        <!-- Section 5: Conclusion Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-100">
                 <div class="text-blue-500 mb-4 text-3xl"><i class="fas fa-shopping-cart"></i></div>
                 <h4 class="text-lg font-bold mb-2">실버 마켓의 부상</h4>
-                <p class="text-slate-600 text-sm">고령층 이용자가 1,170만 명을 돌파함에 따라 헬스케어, 간편결제 등 실버 테크 시장이 폭발적으로 성장할 것입니다.</p>
+                <p class="text-slate-600 text-sm leading-relaxed">고령층이 디지털 인구의 25%를 차지하게 됨에 따라 실버 테크 시장이 메인스트림이 될 것입니다.</p>
             </div>
-            <div class="p-6">
-                <div class="text-blue-500 mb-4 text-3xl"><i class="fas fa-layer-group"></i></div>
-                <h4 class="text-lg font-bold mb-2">질적 활용도 중심</h4>
-                <p class="text-slate-600 text-sm">단순 접속을 넘어선 정보 탐색 역량이 3.23점으로 상승했습니다. 전문적이고 가치 있는 유료 콘텐츠 시장이 활성화될 전망입니다.</p>
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-100">
+                <div class="text-purple-500 mb-4 text-3xl"><i class="fas fa-layer-group"></i></div>
+                <h4 class="text-lg font-bold mb-2">질적 활용 중심 사회</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">역량 점수 3.23점은 데이터 리터러시가 대중화되었음을 의미하며, 고품질 유료 서비스 수요가 증가할 것입니다.</p>
             </div>
-            <div class="p-6">
-                <div class="text-blue-500 mb-4 text-3xl"><i class="fas fa-balance-scale"></i></div>
-                <h4 class="text-lg font-bold mb-2">디지털 평등 실현</h4>
-                <p class="text-slate-600 text-sm">성별 격차의 해소는 마케팅 및 서비스 전략이 성별 구분을 넘어 개인의 취향과 관심사 중심으로 재편됨을 의미합니다.</p>
+            <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-100">
+                <div class="text-emerald-500 mb-4 text-3xl"><i class="fas fa-balance-scale"></i></div>
+                <h4 class="text-lg font-bold mb-2">디지털 격차 소멸</h4>
+                <p class="text-slate-600 text-sm leading-relaxed">2030년 이용률 99.9% 도달은 성별, 연령에 따른 물리적 접근 격차가 완전히 해소됨을 시사합니다.</p>
             </div>
         </div>
 
     </main>
 
     <footer class="bg-slate-100 border-t border-slate-200 py-10 px-6 text-center text-slate-500 text-sm">
-        <p>© 2025 대한민국 인터넷 이용 실태 분석 보고서. All Rights Reserved.</p>
+        <p>© 2025 대한민국 인터넷 이용 실태 보고서. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // Common Chart Options
+        // Global Chart Styles
+        Chart.defaults.font.family = "'Pretendard', sans-serif";
+        Chart.defaults.color = '#64748b';
+
         const chartOptions = {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'bottom' }
-            },
+            plugins: { legend: { position: 'bottom' } },
             scales: {
                 y: { beginAtZero: false, grid: { color: '#f1f5f9' } },
                 x: { grid: { display: false } }
@@ -181,24 +179,23 @@
         // 1. Main Trend Chart
         const mainTrendCtx = document.getElementById('mainTrendChart').getContext('2d');
         new Chart(mainTrendCtx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
                 datasets: [
                     {
                         label: '이용자 수 (만 명)',
-                        data: [4528, 4612, 4635, 4705, 4774, 4768, 4775, 4818],
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        fill: true,
-                        tension: 0.4
+                        data: [4528, 4612, 4635, 4705, 4774, 4768, 4775, 4819],
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        yAxisID: 'y'
                     },
                     {
                         label: '이용률 (%)',
                         data: [95.1, 95.8, 96.0, 96.5, 97.2, 96.7, 97.5, 97.9],
+                        type: 'line',
                         borderColor: '#10b981',
-                        borderDash: [5, 5],
-                        tension: 0.4,
+                        borderWidth: 3,
+                        pointBackgroundColor: '#fff',
                         yAxisID: 'y1'
                     }
                 ]
@@ -206,8 +203,8 @@
             options: {
                 ...chartOptions,
                 scales: {
-                    y: { position: 'left', title: { display: true, text: '만 명' } },
-                    y1: { position: 'right', min: 90, max: 100, title: { display: true, text: '%' }, grid: { display: false } }
+                    y: { position: 'left', min: 4000, title: { display: true, text: '만 명' } },
+                    y1: { position: 'right', min: 90, max: 100, grid: { display: false } }
                 }
             }
         });
@@ -217,43 +214,88 @@
         new Chart(genderCtx, {
             type: 'bar',
             data: {
-                labels: ['2017', '2024'],
+                labels: ['2017년', '2024년'],
                 datasets: [
-                    {
-                        label: '남성 (만 명)',
-                        data: [2331, 2430],
-                        backgroundColor: '#60a5fa'
-                    },
-                    {
-                        label: '여성 (만 명)',
-                        data: [2196, 2388],
-                        backgroundColor: '#f472b6'
-                    }
+                    { label: '남성 (만 명)', data: [2331, 2430], backgroundColor: '#60a5fa' },
+                    { label: '여성 (만 명)', data: [2196, 2388], backgroundColor: '#f472b6' }
                 ]
             },
             options: chartOptions
         });
 
-        // 3. Skill Chart
+        // 3. Senior Chart
+        const seniorCtx = document.getElementById('seniorChart').getContext('2d');
+        new Chart(seniorCtx, {
+            type: 'line',
+            data: {
+                labels: ['2017', '2019', '2021', '2024'],
+                datasets: [{
+                    label: '60대 이상 (만 명)',
+                    data: [602, 820, 1005, 1175],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: chartOptions
+        });
+
+        // 4. Skill Chart
         const skillCtx = document.getElementById('skillChart').getContext('2d');
         new Chart(skillCtx, {
             type: 'line',
             data: {
-                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                labels: ['2018', '2020', '2022', '2024'],
                 datasets: [{
-                    label: '디지털 역량 점수',
-                    data: [2.89, 2.95, 2.98, 3.00, 3.00, 3.10, 3.23],
-                    borderColor: '#8b5cf6',
-                    borderWidth: 3,
-                    pointBackgroundColor: '#fff',
-                    pointRadius: 5,
-                    tension: 0.2
+                    label: '활용 역량 점수',
+                    data: [2.89, 2.98, 3.00, 3.23],
+                    borderColor: '#a855f7',
+                    borderWidth: 4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#fff'
                 }]
+            },
+            options: { ...chartOptions, scales: { y: { min: 2.5, max: 3.5 } } }
+        });
+
+        // 5. Prediction Chart (New)
+        const predCtx = document.getElementById('predictionChart').getContext('2d');
+        new Chart(predCtx, {
+            type: 'line',
+            data: {
+                labels: ['2017', '2018', '2020', '2022', '2024', '2026(P)', '2028(P)', '2030(P)'],
+                datasets: [
+                    {
+                        label: '과거 실적',
+                        data: [4528, 4612, 4705, 4768, 4819, null, null, null],
+                        borderColor: '#3b82f6',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#3b82f6',
+                        tension: 0.3
+                    },
+                    {
+                        label: '미래 예측',
+                        data: [null, null, null, null, 4819, 4900, 4980, 5050],
+                        borderColor: '#facc15',
+                        borderDash: [5, 5],
+                        borderWidth: 3,
+                        pointBackgroundColor: '#facc15',
+                        tension: 0.3
+                    }
+                ]
             },
             options: {
                 ...chartOptions,
+                plugins: { legend: { labels: { color: '#fff' } } },
                 scales: {
-                    y: { min: 2.5, max: 3.5, title: { display: true, text: '점' } }
+                    y: { 
+                        min: 4400, 
+                        max: 5200, 
+                        ticks: { color: '#94a3b8' },
+                        grid: { color: 'rgba(255,255,255,0.05)' } 
+                    },
+                    x: { ticks: { color: '#94a3b8' } }
                 }
             }
         });
