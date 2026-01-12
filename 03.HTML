@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대한민국 인터넷 이용 실태 및 2030 미래 전망</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap');
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; }
+        .gradient-bg { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
+        .card { background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); }
+        .stat-value { font-weight: 700; color: #1e40af; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Header -->
+    <header class="gradient-bg text-white py-12 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-blue-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Future Report 2030</span>
+            <h1 class="text-3xl md:text-5xl font-bold mt-4 mb-6">대한민국 인터넷 이용 실태 및<br>2030 미래 전망 보고서</h1>
+            <p class="text-slate-300 text-lg">데이터로 보는 디지털 대한민국, 현재의 성숙과 미래의 완전 포화</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 -mt-10 mb-20">
+        
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="card p-6 border-t-4 border-blue-500">
+                <div class="flex items-center gap-4 mb-2">
+                    <div class="p-3 bg-blue-100 rounded-lg text-blue-600"><i class="fas fa-users fa-xl"></i></div>
+                    <h3 class="font-semibold text-slate-500 uppercase">2024 이용자 수</h3>
+                </div>
+                <div class="text-3xl stat-value">4,818만 명</div>
+                <p class="text-sm text-slate-400 mt-2">2017년 대비 약 300만 명 증가</p>
+            </div>
+            <div class="card p-6 border-t-4 border-green-500">
+                <div class="flex items-center gap-4 mb-2">
+                    <div class="p-3 bg-green-100 rounded-lg text-green-600"><i class="fas fa-chart-line fa-xl"></i></div>
+                    <h3 class="font-semibold text-slate-500 uppercase">2024 이용률</h3>
+                </div>
+                <div class="text-3xl stat-value">97.9%</div>
+                <p class="text-sm text-slate-400 mt-2">보편적 서비스 단계 진입 완료</p>
+            </div>
+            <div class="card p-6 border-t-4 border-purple-500">
+                <div class="flex items-center gap-4 mb-2">
+                    <div class="p-3 bg-purple-100 rounded-lg text-purple-600"><i class="fas fa-brain fa-xl"></i></div>
+                    <h3 class="font-semibold text-slate-500 uppercase">활용 역량 점수</h3>
+                </div>
+                <div class="text-3xl stat-value">3.23 / 4.0</div>
+                <p class="text-sm text-slate-400 mt-2">역대 최고치, 질적 성장 가속화</p>
+            </div>
+        </div>
+
+        <!-- Section 1 & 2: Trends -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="card p-8">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-signal text-blue-500"></i> 인터넷 이용자 수 및 보급률 추이
+                </h2>
+                <div class="relative h-64">
+                    <canvas id="mainTrendChart"></canvas>
+                </div>
+                <p class="mt-6 text-slate-600 text-sm leading-relaxed">
+                    2017년 95.1%였던 이용률은 매년 꾸준히 상승하여 현재 97.9%에 도달했습니다. 2022년 소폭 정체를 겪었으나 2024년 다시 성장세를 회복하며 완만한 성숙기를 유지하고 있습니다.
+                </p>
+            </div>
+
+            <div class="card p-8">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-venus-mars text-pink-500"></i> 성별 이용자 격차 해소
+                </h2>
+                <div class="relative h-64">
+                    <canvas id="genderChart"></canvas>
+                </div>
+                <p class="mt-6 text-slate-600 text-sm leading-relaxed">
+                    여성 이용자 수가 2017년 이후 약 192만 명 증가하며 남성 증가 폭(99만 명)을 크게 상회했습니다. 이제 성별에 따른 디지털 격차는 사실상 소멸한 것으로 분석됩니다.
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 3: Silver & Competency -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="md:col-span-1 card p-8 bg-blue-50">
+                <h2 class="text-xl font-bold mb-4">60대 고령층의 급증</h2>
+                <div class="text-center py-6">
+                    <div class="text-sm text-slate-500 mb-1">2017년 602만 명</div>
+                    <div class="text-4xl font-bold text-blue-600 my-2">2.0배 증폭</div>
+                    <div class="text-lg font-semibold text-slate-700">2024년 1,175만 명</div>
+                </div>
+                <p class="text-sm text-slate-600 leading-relaxed mt-4">
+                    실버 세대가 전체 인터넷 인구 성장의 핵심 동력입니다. 이들을 위한 맞춤형 UX/UI 설계가 기업과 서비스의 필수 과제가 되었습니다.
+                </p>
+            </div>
+            
+            <div class="md:col-span-2 card p-8">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-star text-yellow-500"></i> 디지털 활용 역량 점수 추이 (4점 만점)
+                </h2>
+                <div class="relative h-64">
+                    <canvas id="skillChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: 2030 Prediction -->
+        <div class="card p-8 bg-slate-900 text-white mb-12">
+            <h2 class="text-2xl font-bold mb-8 text-center">2030년 대한민국 미래 예측 (Projection)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="flex flex-col justify-center items-center p-6 border border-slate-700 rounded-xl">
+                    <span class="text-slate-400 mb-2">총 이용자 수</span>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-5xl font-bold text-blue-400">5,050</span>
+                        <span class="text-xl font-semibold">만 명</span>
+                    </div>
+                    <div class="mt-4 flex items-center text-green-400 gap-1">
+                        <i class="fas fa-caret-up"></i>
+                        <span>현재 대비 약 230만 명 추가 확보</span>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center items-center p-6 border border-slate-700 rounded-xl">
+                    <span class="text-slate-400 mb-2">인터넷 이용률</span>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-5xl font-bold text-blue-400">99.9</span>
+                        <span class="text-xl font-semibold">%</span>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <span class="bg-blue-900 text-blue-200 px-3 py-1 rounded text-sm font-semibold">완전 포화 및 보편적 디지털 사회</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 p-4 bg-slate-800 rounded-lg text-sm text-slate-400 border-l-4 border-blue-500 italic">
+                * 위 수치는 2017-2024 과거 성장 모델링을 기반으로 산출된 예측치입니다.
+            </div>
+        </div>
+
+        <!-- Section 5: Conclusion -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-6">
+                <div class="text-blue-500 mb-4 text-3xl"><i class="fas fa-shopping-cart"></i></div>
+                <h4 class="text-lg font-bold mb-2">실버 마켓의 부상</h4>
+                <p class="text-slate-600 text-sm">고령층 이용자가 1,170만 명을 돌파함에 따라 헬스케어, 간편결제 등 실버 테크 시장이 폭발적으로 성장할 것입니다.</p>
+            </div>
+            <div class="p-6">
+                <div class="text-blue-500 mb-4 text-3xl"><i class="fas fa-layer-group"></i></div>
+                <h4 class="text-lg font-bold mb-2">질적 활용도 중심</h4>
+                <p class="text-slate-600 text-sm">단순 접속을 넘어선 정보 탐색 역량이 3.23점으로 상승했습니다. 전문적이고 가치 있는 유료 콘텐츠 시장이 활성화될 전망입니다.</p>
+            </div>
+            <div class="p-6">
+                <div class="text-blue-500 mb-4 text-3xl"><i class="fas fa-balance-scale"></i></div>
+                <h4 class="text-lg font-bold mb-2">디지털 평등 실현</h4>
+                <p class="text-slate-600 text-sm">성별 격차의 해소는 마케팅 및 서비스 전략이 성별 구분을 넘어 개인의 취향과 관심사 중심으로 재편됨을 의미합니다.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-100 border-t border-slate-200 py-10 px-6 text-center text-slate-500 text-sm">
+        <p>© 2025 대한민국 인터넷 이용 실태 분석 보고서. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Common Chart Options
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' }
+            },
+            scales: {
+                y: { beginAtZero: false, grid: { color: '#f1f5f9' } },
+                x: { grid: { display: false } }
+            }
+        };
+
+        // 1. Main Trend Chart
+        const mainTrendCtx = document.getElementById('mainTrendChart').getContext('2d');
+        new Chart(mainTrendCtx, {
+            type: 'line',
+            data: {
+                labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [
+                    {
+                        label: '이용자 수 (만 명)',
+                        data: [4528, 4612, 4635, 4705, 4774, 4768, 4775, 4818],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: '이용률 (%)',
+                        data: [95.1, 95.8, 96.0, 96.5, 97.2, 96.7, 97.5, 97.9],
+                        borderColor: '#10b981',
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: { position: 'left', title: { display: true, text: '만 명' } },
+                    y1: { position: 'right', min: 90, max: 100, title: { display: true, text: '%' }, grid: { display: false } }
+                }
+            }
+        });
+
+        // 2. Gender Chart
+        const genderCtx = document.getElementById('genderChart').getContext('2d');
+        new Chart(genderCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2017', '2024'],
+                datasets: [
+                    {
+                        label: '남성 (만 명)',
+                        data: [2331, 2430],
+                        backgroundColor: '#60a5fa'
+                    },
+                    {
+                        label: '여성 (만 명)',
+                        data: [2196, 2388],
+                        backgroundColor: '#f472b6'
+                    }
+                ]
+            },
+            options: chartOptions
+        });
+
+        // 3. Skill Chart
+        const skillCtx = document.getElementById('skillChart').getContext('2d');
+        new Chart(skillCtx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: '디지털 역량 점수',
+                    data: [2.89, 2.95, 2.98, 3.00, 3.00, 3.10, 3.23],
+                    borderColor: '#8b5cf6',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointRadius: 5,
+                    tension: 0.2
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: { min: 2.5, max: 3.5, title: { display: true, text: '점' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
