@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴퓨터공학과 입시 결과 분석</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f8fafc;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 60vh;
+            width: 80vw;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="mb-10 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-2">🎓 주요 대학 컴퓨터공학과 입시 결과</h1>
+            <p class="text-slate-500 text-lg">일반전형 기준 최고 등급 및 최저 등급 분포</p>
+        </header>
+
+        <!-- 통계 카드 섹션 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 transition hover:shadow-md">
+                <p class="text-sm font-semibold text-blue-600 mb-1">가장 높은 컷</p>
+                <h3 class="text-2xl font-bold text-slate-800">이화여대 (1.46)</h3>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 transition hover:shadow-md">
+                <p class="text-sm font-semibold text-indigo-600 mb-1">평균적인 위치</p>
+                <h3 class="text-2xl font-bold text-slate-800">세종대 (2.2)</h3>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 transition hover:shadow-md">
+                <p class="text-sm font-semibold text-emerald-600 mb-1">최대 격차 대학</p>
+                <h3 class="text-2xl font-bold text-slate-800">동아대 (0.33)</h3>
+            </div>
+        </div>
+
+        <!-- 그래프 섹션 -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+            <div class="chart-container">
+                <canvas id="gradeChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 데이터 테이블 섹션 -->
+        <div class="mt-10 overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-100">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50">
+                        <th class="p-4 font-bold text-slate-700 border-b">대학교명</th>
+                        <th class="p-4 font-bold text-blue-600 border-b text-center">최고 등급</th>
+                        <th class="p-4 font-bold text-red-600 border-b text-center">최저 등급</th>
+                        <th class="p-4 font-bold text-slate-700 border-b text-center">등급 편차</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTable">
+                    <!-- JS로 데이터 삽입 -->
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="mt-12 text-center text-slate-400 text-sm">
+            <p>© 2024 대입 정보 시각화 프로젝트. 제공된 데이터를 기반으로 제작되었습니다.</p>
+        </footer>
+    </div>
+
+    <script>
+        const rawData = [
+            { name: "경희대", max: 1.72, min: 1.72 },
+            { name: "경성대", max: 3.5, min: 3.8 },
+            { name: "동아대", max: 3.62, min: 3.95 },
+            { name: "세종대", max: 2.2, min: 2.2 },
+            { name: "충북대", max: 3.05, min: 3.15 },
+            { name: "이화여대", max: 1.46, min: 1.52 }
+        ];
+
+        // 데이터 정렬 (등급이 높은 순서대로)
+        const sortedData = [...rawData].sort((a, b) => a.max - b.max);
+
+        // 테이블 생성
+        const tableBody = document.getElementById('dataTable');
+        sortedData.forEach(item => {
+            const diff = (item.min - item.max).toFixed(2);
+            const row = `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-4 border-b font-semibold text-slate-800">${item.name}</td>
+                    <td class="p-4 border-b text-center text-blue-500">${item.max}</td>
+                    <td class="p-4 border-b text-center text-red-400">${item.min}</td>
+                    <td class="p-4 border-b text-center text-slate-500">${diff}</td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+
+        // 차트 생성
+        const ctx = document.getElementById('gradeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: sortedData.map(item => item.name),
+                datasets: [
+                    {
+                        label: '최고 등급',
+                        data: sortedData.map(item => item.max),
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        borderWidth: 1,
+                        borderRadius: 6
+                    },
+                    {
+                        label: '최저 등급',
+                        data: sortedData.map(item => item.min),
+                        backgroundColor: 'rgba(248, 113, 113, 0.7)',
+                        borderColor: 'rgb(248, 113, 113)',
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { font: { family: 'Pretendard', size: 14 } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw + '등급';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        reverse: true, // 1등급이 위에 오도록 역순 배치
+                        min: 1,
+                        max: 5,
+                        title: {
+                            display: true,
+                            text: '등급 (낮을수록 상위)',
+                            font: { weight: 'bold' }
+                        }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
