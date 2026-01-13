@@ -45,11 +45,35 @@
             font-size: 0.75rem;
             font-weight: 700;
         }
+
+        /* 홈 버튼 스타일 */
+        .home-btn {
+            transition: all 0.3s ease;
+        }
+        .home-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <div class="min-h-screen pb-20">
+        <!-- 상단 내비게이션 바 (홈으로 가기 포함) -->
+        <nav class="gradient-header sticky top-0 z-50 px-6 py-4 border-b border-white/10 shadow-lg">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <a href="#" onclick="window.location.reload();" class="home-btn flex items-center gap-2 text-white px-4 py-2 rounded-xl font-bold">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    <span>홈으로 가기</span>
+                </a>
+                <div class="hidden md:block text-blue-200 text-sm font-medium">
+                    2024학년도 컴공 입시 분석 데이터 리포트
+                </div>
+            </div>
+        </nav>
+
         <!-- 상단 헤더 -->
         <header class="gradient-header text-white py-16 px-6 text-center shadow-2xl mb-12">
             <div class="max-w-4xl mx-auto">
@@ -187,7 +211,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </aside>
             </div>
         </main>
 
