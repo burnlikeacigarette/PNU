@@ -7,254 +7,297 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;900&display=swap');
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
         body {
             font-family: 'Pretendard', sans-serif;
             background-color: #f8fafc;
+            color: #1e293b;
         }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
         .chart-container {
             position: relative;
-            margin: auto;
-            height: 50vh;
+            height: 400px;
             width: 100%;
         }
-        .bg-gradient-header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+
+        .gradient-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .badge-target {
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
         }
     </style>
 </head>
-<body class="p-4 md:p-8 text-slate-900">
+<body class="antialiased">
 
-    <div class="max-w-6xl mx-auto">
-        <!-- 헤더 섹션 -->
-        <header class="mb-10 text-center py-12 rounded-[2.5rem] bg-gradient-header text-white shadow-2xl border-b-4 border-blue-500">
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">🖥️ 컴공 합격자 평균 등급 리포트</h1>
-            <p class="text-blue-200 text-lg md:text-xl opacity-90">평균 등급과 최저 컷을 통한 대학별 합격 가능성 정밀 분석</p>
+    <div class="min-h-screen pb-20">
+        <!-- 상단 헤더 -->
+        <header class="gradient-header text-white py-16 px-6 text-center shadow-2xl mb-12">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-black mb-6 tracking-tight">🖥️ 컴공 합격자 데이터 분석 리포트</h1>
+                <p class="text-blue-200 text-lg md:text-xl font-medium opacity-90 leading-relaxed">
+                    대학별 평균 등급 및 최저 등급 데이터를 기반으로 한 <br class="hidden md:block">
+                    성적대별(3~4등급 포함) 맞춤형 지원 전략 가이드
+                </p>
+            </div>
         </header>
 
-        <!-- 핵심 요약 지표 -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-10">
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 hover:border-blue-400 transition-colors">
-                <p class="text-xs font-bold text-slate-400 mb-2">가장 높은 평균선</p>
-                <h3 class="text-3xl font-black text-blue-600">1.46 <span class="text-sm font-medium text-slate-400 ml-1">이화여대</span></h3>
+        <main class="max-w-7xl mx-auto px-4 md:px-8">
+            <!-- 핵심 요약 위젯 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="glass-card p-6 rounded-3xl shadow-sm border-b-4 border-blue-500">
+                    <p class="text-sm font-bold text-slate-400 mb-1">최고 평균 대학</p>
+                    <h3 class="text-3xl font-black text-slate-800">1.46 <span class="text-sm font-bold text-blue-500">이화여대</span></h3>
+                </div>
+                <div class="glass-card p-6 rounded-3xl shadow-sm border-b-4 border-indigo-500">
+                    <p class="text-sm font-bold text-slate-400 mb-1">전체 데이터 평균</p>
+                    <h3 class="text-3xl font-black text-slate-800">2.62 <span class="text-sm font-bold text-indigo-500">등급</span></h3>
+                </div>
+                <div class="glass-card p-6 rounded-3xl shadow-sm border-b-4 border-emerald-500">
+                    <p class="text-sm font-bold text-slate-400 mb-1">최대 합격 편차</p>
+                    <h3 class="text-3xl font-black text-slate-800">0.33 <span class="text-sm font-bold text-emerald-500">동아대</span></h3>
+                </div>
+                <div class="glass-card p-6 rounded-3xl shadow-sm border-b-4 border-amber-500">
+                    <p class="text-sm font-bold text-slate-400 mb-1">전략 분석 타겟</p>
+                    <h3 class="text-3xl font-black text-slate-800">3~4 <span class="text-sm font-bold text-amber-500">등급대</span></h3>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 hover:border-indigo-400 transition-colors">
-                <p class="text-xs font-bold text-slate-400 mb-2">전체 대학 평균값</p>
-                <h3 class="text-3xl font-black text-indigo-600">2.62 <span class="text-sm font-medium text-slate-400 ml-1">등급</span></h3>
-            </div>
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 hover:border-emerald-400 transition-colors">
-                <p class="text-xs font-bold text-slate-400 mb-2">최대 하향폭(꼬리)</p>
-                <h3 class="text-3xl font-black text-emerald-600">0.33 <span class="text-sm font-medium text-slate-400 ml-1">동아대</span></h3>
-            </div>
-            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 hover:border-amber-400 transition-colors">
-                <p class="text-xs font-bold text-slate-400 mb-2">데이터 신뢰도</p>
-                <h3 class="text-3xl font-black text-amber-600">High <span class="text-sm font-medium text-slate-400 ml-1">Verified</span></h3>
-            </div>
-        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- 메인 시각화 영역 -->
-            <div class="lg:col-span-2 space-y-8">
-                <div class="bg-white p-8 rounded-[2rem] shadow-xl border border-slate-100">
-                    <div class="flex items-center justify-between mb-8">
-                        <div>
-                            <h2 class="text-2xl font-bold text-slate-800">합격자 등급 분포도</h2>
-                            <p class="text-sm text-slate-500 mt-1 italic">평균 대비 최저 등급의 하락 폭을 확인하세요.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- 왼쪽: 그래프 및 테이블 -->
+                <div class="lg:col-span-8 space-y-8">
+                    
+                    <!-- 3~4등급 맞춤형 공지 -->
+                    <section class="bg-blue-50 border-2 border-blue-200 p-6 rounded-[2rem] shadow-sm flex items-start gap-4">
+                        <div class="bg-blue-500 text-white p-3 rounded-2xl shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                         </div>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="gradeChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- 데이터 테이블 -->
-                <div class="bg-white rounded-[2rem] shadow-xl border border-slate-100 overflow-hidden">
-                    <div class="p-6 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
-                        <h2 class="text-xl font-bold text-slate-800">대학별 상세 입시 데이터</h2>
-                        <span class="text-xs font-bold bg-white px-3 py-1 rounded-full text-slate-500 shadow-sm border border-slate-200">Sorted by Avg.</span>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead>
-                                <tr class="text-slate-500 text-sm uppercase tracking-wider">
-                                    <th class="p-5 font-bold">대학교</th>
-                                    <th class="p-5 font-bold text-center">평균 등급</th>
-                                    <th class="p-5 font-bold text-center">최저 등급</th>
-                                    <th class="p-5 font-bold text-center">합격 안정성</th>
-                                    <th class="p-5 font-bold">특이사항</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dataTable">
-                                <!-- JS content -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 분석 사이드 리포트 -->
-            <div class="space-y-6">
-                <!-- 지원 가능 분석 -->
-                <div class="bg-blue-50 p-7 rounded-[2rem] border border-blue-100 shadow-sm">
-                    <h2 class="text-xl font-bold text-blue-900 mb-5 flex items-center">
-                        <span class="bg-blue-200 p-2 rounded-lg mr-3 text-lg">📊</span> 등급대별 판세
-                    </h2>
-                    <div class="space-y-5">
                         <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-bold text-blue-800 italic">1.0 ~ 2.0 등급 (상위권)</span>
-                            </div>
-                            <p class="text-sm text-blue-700/80 leading-relaxed">
-                                <strong>이화여대, 경희대</strong>가 위치함. 평균과 최저의 격차가 극도로 적어 '빈틈이 없는' 전형임.
+                            <h4 class="text-xl font-bold text-blue-900 mb-2">5등급제 기준 3~4등급 학생 필독</h4>
+                            <p class="text-blue-800 leading-relaxed text-sm md:text-base">
+                                본 데이터 분석 결과, 내신 <strong>3~4등급대 학생들은 충북대, 경성대, 동아대</strong>를 주요 전략 대학으로 고려해야 합니다. 
+                                인서울 주요 대학보다는 지역 거점 국립대 및 주요 사립대의 '최저 등급' 구간을 공략하는 것이 합격 확률을 극대화하는 핵심 전략입니다.
                             </p>
                         </div>
-                        <div class="h-px bg-blue-200"></div>
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-bold text-blue-800 italic">2.0 ~ 3.0 등급 (중위권)</span>
+                    </section>
+
+                    <!-- 메인 차트 -->
+                    <section class="glass-card p-8 rounded-[2.5rem] shadow-xl">
+                        <div class="flex items-center justify-between mb-8">
+                            <h2 class="text-2xl font-bold text-slate-800">대학별 등급 분포 (평균 vs 최저)</h2>
+                            <div class="flex gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                                <span class="flex items-center gap-1"><span class="w-3 h-3 bg-blue-500 rounded-full"></span> 평균</span>
+                                <span class="flex items-center gap-1"><span class="w-3 h-3 bg-red-400 rounded-full"></span> 최저</span>
                             </div>
-                            <p class="text-sm text-blue-700/80 leading-relaxed">
-                                <strong>세종대</strong>가 중심. 인서울 공대의 평균적인 입결을 보여주며 매우 안정적인 합격선 형성.
-                            </p>
                         </div>
-                        <div class="h-px bg-blue-200"></div>
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-bold text-blue-800 italic">3.0 등급 이상 (거점권)</span>
+                        <div class="chart-container">
+                            <canvas id="admissionChart"></canvas>
+                        </div>
+                    </section>
+
+                    <!-- 상세 데이터 테이블 -->
+                    <section class="glass-card rounded-[2.5rem] shadow-xl overflow-hidden">
+                        <div class="p-8 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">대학별 상세 입시 데이터</h2>
+                                <p class="text-sm font-semibold text-slate-400 mt-1">※ 5등급제 기준 3~4등급 학생의 합격 가능성 분석 포함</p>
                             </div>
-                            <p class="text-sm text-blue-700/80 leading-relaxed">
-                                <strong>충북대, 경성대, 동아대</strong>. 지역 내 인기 학과로서 평균 대비 최저의 낙폭이 커지는 구간임.
-                            </p>
                         </div>
-                    </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-slate-50 text-slate-500 font-bold text-sm uppercase tracking-wider">
+                                    <tr>
+                                        <th class="p-6">대학명</th>
+                                        <th class="p-6 text-center">평균 등급</th>
+                                        <th class="p-6 text-center">최저 등급</th>
+                                        <th class="p-6 text-center">3~4등급 지원전략</th>
+                                        <th class="p-6">분석 코멘트</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableContent" class="divide-y divide-slate-100">
+                                    <!-- 데이터 로드 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
                 </div>
 
-                <!-- 합격 전략 가이드 -->
-                <div class="bg-white p-7 rounded-[2rem] shadow-xl border border-slate-100">
-                    <h2 class="text-xl font-bold text-slate-800 mb-5 flex items-center">
-                        <span class="bg-slate-100 p-2 rounded-lg mr-3 text-lg">🎯</span> 지원 핵심 요약
-                    </h2>
-                    <div class="space-y-4">
-                        <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
-                            <h4 class="font-bold text-emerald-900 text-sm mb-1">안정 지원 (경희대/세종대)</h4>
-                            <p class="text-xs text-emerald-800/70">평균과 최저가 일치함. 자신의 점수가 해당 등급 미달일 경우 합격 확률이 희박함.</p>
+                <!-- 오른쪽: 인사이트 리포트 -->
+                <aside class="lg:col-span-4 space-y-8">
+                    <!-- 3~4등급 심층 가이드 -->
+                    <div class="bg-amber-50 p-8 rounded-[2.5rem] border border-amber-200 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                         </div>
-                        <div class="p-4 bg-amber-50 rounded-2xl border border-amber-100">
-                            <h4 class="font-bold text-amber-900 text-sm mb-1">추합 노리기 (동아대/경성대)</h4>
-                            <p class="text-xs text-amber-800/70">평균보다 점수가 조금 낮더라도 최저 컷과의 간극이 있어 후보 번호를 기대할 수 있음.</p>
+                        <h2 class="text-2xl font-black text-amber-900 mb-6">3.x ~ 4.x 전략 가이드</h2>
+                        <div class="space-y-6">
+                            <div class="bg-white/50 p-4 rounded-2xl">
+                                <h5 class="font-bold text-amber-900 mb-1">동아대 (3.62 ~ 3.95)</h5>
+                                <p class="text-sm text-amber-800/80 leading-relaxed">평균보다 0.33등급 낮은 3.95까지 합격 가능. 4등급 초반 학생이 추합을 노릴 최적의 장소.</p>
+                            </div>
+                            <div class="bg-white/50 p-4 rounded-2xl">
+                                <h5 class="font-bold text-amber-900 mb-1">경성대 (3.5 ~ 3.8)</h5>
+                                <p class="text-sm text-amber-800/80 leading-relaxed">전형별 최저 기준 충족 시 3등급 중후반 학생들에게 매우 안정적인 선택지입니다.</p>
+                            </div>
+                            <div class="bg-white/50 p-4 rounded-2xl">
+                                <h5 class="font-bold text-amber-900 mb-1">충북대 (3.05 ~ 3.15)</h5>
+                                <p class="text-sm text-amber-800/80 leading-relaxed">3등급 극초반 학생들의 마지노선. 국립대 프리미엄으로 인해 3.5등급 이하는 상향 지원이 필요합니다.</p>
+                            </div>
                         </div>
-                        <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
-                            <h4 class="font-bold text-indigo-900 text-sm mb-1">상향 지원 (이화여대)</h4>
-                            <p class="text-xs text-indigo-800/70">평균 1.46은 매우 높은 수치임. 1.5등급 밖이라면 서류/면접 역전 요소를 확인해야 함.</p>
-                        </div>
+                    </div>
+
+                    <!-- 종합 지원 팁 -->
+                    <div class="glass-card p-8 rounded-[2.5rem] shadow-xl">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-6">성공 지원 핵심 포인트</h2>
+                        <ul class="space-y-5">
+                            <li class="flex gap-4">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold flex-shrink-0">1</div>
+                                <p class="text-sm text-slate-600 leading-relaxed"><strong>이화/경희/세종</strong>은 1~2등급대 학생들의 각축장입니다. 3등급 이하 학생에게는 현실적으로 높은 벽입니다.</p>
+                            </li>
+                            <li class="flex gap-4">
+                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold flex-shrink-0">2</div>
+                                <p class="text-sm text-slate-600 leading-relaxed"><strong>평균과 최저의 간격</strong>이 넓은 대학(동아대)일수록 추가 합격 예비 번호가 뒤쪽까지 빠질 가능성이 큽니다.</p>
+                            </li>
+                            <li class="flex gap-4">
+                                <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold flex-shrink-0">3</div>
+                                <p class="text-sm text-slate-600 leading-relaxed">3.5등급 이하 학생은 <strong>'적정' 대학 2곳, '상향' 대학 1곳</strong>의 비율로 지원하는 것이 리스크 관리 측면에서 유리합니다.</p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
 
-        <footer class="mt-16 pb-12 text-center">
-            <div class="inline-flex items-center space-x-2 text-slate-400 text-sm bg-white px-6 py-2 rounded-full shadow-sm border border-slate-100">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span>최근 업데이트: 2024학년도 정시/수시 통합 데이터 기준</span>
-            </div>
+        <footer class="mt-20 text-center text-slate-400">
+            <p class="text-sm">© 2024 Computer Science Admission Portal. 본 데이터는 교육용 참고 자료로만 활용해 주세요.</p>
         </footer>
     </div>
 
     <script>
-        // 데이터 정의
-        const universityData = [
-            { name: "경희대", avg: 1.72, min: 1.72, desc: "철벽 방어" },
-            { name: "경성대", avg: 3.5, min: 3.8, desc: "유연한 합격권" },
-            { name: "동아대", avg: 3.62, min: 3.95, desc: "추합 기회 다수" },
-            { name: "세종대", avg: 2.2, min: 2.2, desc: "표준 정규 분포" },
-            { name: "충북대", avg: 3.05, min: 3.15, desc: "거점 국립 위상" },
-            { name: "이화여대", avg: 1.46, min: 1.52, desc: "최상위 경쟁력" }
+        const data = [
+            { name: '이화여대', avg: 1.46, min: 1.52, strategy: '상향 불가', note: '최상위 밀집 구간' },
+            { name: '경희대', avg: 1.72, min: 1.72, strategy: '상향 불가', note: '등급 밴드 없음 (안정)' },
+            { name: '세종대', avg: 2.2, min: 2.2, strategy: '상향/소신', note: '인서울 주요 마지노선' },
+            { name: '충북대', avg: 3.05, min: 3.15, strategy: '소신/적정', note: '3등급 초반 안정' },
+            { name: '경성대', avg: 3.5, min: 3.8, strategy: '적정/안정', note: '3등급 중후반 추천' },
+            { name: '동아대', avg: 3.62, min: 3.95, strategy: '적정/안정', note: '4등급 초반 추합 가능' }
         ];
 
-        // 평균 등급 기준 정렬
-        const sortedData = [...universityData].sort((a, b) => a.avg - b.avg);
+        // 테이블 렌더링
+        const tbody = document.getElementById('tableContent');
+        data.forEach(item => {
+            let badgeColor = '';
+            if (item.strategy === '적정/안정') badgeColor = 'bg-green-100 text-green-700';
+            else if (item.strategy === '소신/적정') badgeColor = 'bg-blue-100 text-blue-700';
+            else if (item.strategy === '상향/소신') badgeColor = 'bg-amber-100 text-amber-700';
+            else badgeColor = 'bg-red-100 text-red-700';
 
-        // 테이블 생성
-        const tableBody = document.getElementById('dataTable');
-        sortedData.forEach(item => {
-            const diff = (item.min - item.avg).toFixed(2);
-            let safetyIcon = diff > 0.2 ? '🟢 높음' : (diff > 0 ? '🟡 보통' : '🔴 매우 낮음');
-            
-            tableBody.innerHTML += `
-                <tr class="hover:bg-slate-50 transition border-b border-slate-50 last:border-0">
-                    <td class="p-5 font-bold text-slate-800">${item.name}</td>
-                    <td class="p-5 text-center text-blue-600 font-extrabold">${item.avg}</td>
-                    <td class="p-5 text-center text-red-400 font-bold">${item.min}</td>
-                    <td class="p-5 text-center text-sm font-semibold">${safetyIcon}</td>
-                    <td class="p-5 text-sm text-slate-500 font-medium">${item.desc}</td>
+            const row = `
+                <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td class="p-6 font-extrabold text-slate-800">${item.name}</td>
+                    <td class="p-6 text-center text-blue-600 font-black text-lg">${item.avg}</td>
+                    <td class="p-6 text-center text-red-500 font-bold text-lg">${item.min}</td>
+                    <td class="p-6 text-center">
+                        <span class="badge-target ${badgeColor}">${item.strategy}</span>
+                    </td>
+                    <td class="p-6 text-sm text-slate-500 font-medium">${item.note}</td>
                 </tr>
             `;
+            tbody.innerHTML += row;
         });
 
         // 차트 초기화
-        const ctx = document.getElementById('gradeChart').getContext('2d');
+        const ctx = document.getElementById('admissionChart').getContext('2d');
         
-        // 그라데이션
-        const avgGrad = ctx.createLinearGradient(0, 0, 0, 400);
-        avgGrad.addColorStop(0, '#3b82f6');
-        avgGrad.addColorStop(1, '#60a5fa');
+        // 그라데이션 설정
+        const blueGrad = ctx.createLinearGradient(0, 0, 0, 400);
+        blueGrad.addColorStop(0, '#3b82f6');
+        blueGrad.addColorStop(1, '#60a5fa');
 
-        const minGrad = ctx.createLinearGradient(0, 0, 0, 400);
-        minGrad.addColorStop(0, '#f87171');
-        minGrad.addColorStop(1, '#fca5a5');
+        const redGrad = ctx.createLinearGradient(0, 0, 0, 400);
+        redGrad.addColorStop(0, '#f87171');
+        redGrad.addColorStop(1, '#fca5a5');
 
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: sortedData.map(d => d.name),
+                labels: data.map(d => d.name),
                 datasets: [
                     {
-                        label: '평균 등급 (Average)',
-                        data: sortedData.map(d => d.avg),
-                        backgroundColor: avgGrad,
+                        label: '합격자 평균 등급',
+                        data: data.map(d => d.avg),
+                        backgroundColor: blueGrad,
                         borderRadius: 12,
                         barPercentage: 0.5,
-                        categoryPercentage: 0.8
                     },
                     {
-                        label: '최저 등급 (Lowest)',
-                        data: sortedData.map(d => d.min),
-                        backgroundColor: minGrad,
+                        label: '최종 합격 컷(최저)',
+                        data: data.map(d => d.min),
+                        backgroundColor: redGrad,
                         borderRadius: 12,
                         barPercentage: 0.5,
-                        categoryPercentage: 0.8
                     }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                indexAxis: 'x',
+                scales: {
+                    y: {
+                        reverse: true,
+                        min: 1,
+                        max: 4.5,
+                        grid: { color: '#f1f5f9' },
+                        ticks: {
+                            font: { family: 'Pretendard', weight: 'bold' },
+                            stepSize: 0.5
+                        },
+                        title: { display: true, text: '내신 등급', font: { weight: 'bold' } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Pretendard', weight: 'bold', size: 14 } }
+                    }
+                },
                 plugins: {
                     legend: {
                         position: 'top',
                         align: 'end',
-                        labels: { usePointStyle: true, pointStyle: 'circle', font: { family: 'Pretendard', size: 12, weight: 'bold' } }
+                        labels: { usePointStyle: true, font: { family: 'Pretendard', weight: 'bold' } }
                     },
                     tooltip: {
                         backgroundColor: '#1e293b',
-                        padding: 15,
-                        titleFont: { size: 14, weight: 'bold' },
-                        bodyFont: { size: 13 },
-                        cornerRadius: 15,
-                        displayColors: true
-                    }
-                },
-                scales: {
-                    y: {
-                        reverse: true, // 등급이 낮을수록 위로
-                        min: 1,
-                        max: 4.5,
-                        ticks: { stepSize: 0.5, color: '#94a3b8', font: { weight: 'bold' } },
-                        grid: { color: '#f1f5f9' }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { color: '#475569', font: { size: 13, weight: 'bold' } }
+                        padding: 16,
+                        titleFont: { size: 16, weight: 'bold' },
+                        bodyFont: { size: 14 },
+                        cornerRadius: 12,
+                        callbacks: {
+                            label: (context) => ` ${context.dataset.label}: ${context.raw}등급`
+                        }
                     }
                 }
             }
