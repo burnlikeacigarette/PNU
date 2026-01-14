@@ -59,10 +59,10 @@
 <body class="antialiased">
 
     <div class="min-h-screen pb-20">
-        <!-- 상단 내비게이션 바 (홈으로 가기 포함) -->
+        <!-- 상단 내비게이션 바 (지정된 링크로 수정됨) -->
         <nav class="gradient-header sticky top-0 z-50 px-6 py-4 border-b border-white/10 shadow-lg">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <a href="#" onclick="window.location.reload();" class="home-btn flex items-center gap-2 text-white px-4 py-2 rounded-xl font-bold">
+                <a href="https://burnlikeacigarette.github.io/PNU/index.HTML" class="home-btn flex items-center gap-2 text-white px-4 py-2 rounded-xl font-bold">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                     </svg>
@@ -254,78 +254,80 @@
         });
 
         // 차트 초기화
-        const ctx = document.getElementById('admissionChart').getContext('2d');
-        
-        // 그라데이션 설정
-        const blueGrad = ctx.createLinearGradient(0, 0, 0, 400);
-        blueGrad.addColorStop(0, '#3b82f6');
-        blueGrad.addColorStop(1, '#60a5fa');
+        window.onload = function() {
+            const ctx = document.getElementById('admissionChart').getContext('2d');
+            
+            // 그라데이션 설정
+            const blueGrad = ctx.createLinearGradient(0, 0, 0, 400);
+            blueGrad.addColorStop(0, '#3b82f6');
+            blueGrad.addColorStop(1, '#60a5fa');
 
-        const redGrad = ctx.createLinearGradient(0, 0, 0, 400);
-        redGrad.addColorStop(0, '#f87171');
-        redGrad.addColorStop(1, '#fca5a5');
+            const redGrad = ctx.createLinearGradient(0, 0, 0, 400);
+            redGrad.addColorStop(0, '#f87171');
+            redGrad.addColorStop(1, '#fca5a5');
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.map(d => d.name),
-                datasets: [
-                    {
-                        label: '합격자 평균 등급',
-                        data: data.map(d => d.avg),
-                        backgroundColor: blueGrad,
-                        borderRadius: 12,
-                        barPercentage: 0.5,
-                    },
-                    {
-                        label: '최종 합격 컷(최저)',
-                        data: data.map(d => d.min),
-                        backgroundColor: redGrad,
-                        borderRadius: 12,
-                        barPercentage: 0.5,
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                indexAxis: 'x',
-                scales: {
-                    y: {
-                        reverse: true,
-                        min: 1,
-                        max: 4.5,
-                        grid: { color: '#f1f5f9' },
-                        ticks: {
-                            font: { family: 'Pretendard', weight: 'bold' },
-                            stepSize: 0.5
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(d => d.name),
+                    datasets: [
+                        {
+                            label: '합격자 평균 등급',
+                            data: data.map(d => d.avg),
+                            backgroundColor: blueGrad,
+                            borderRadius: 12,
+                            barPercentage: 0.5,
                         },
-                        title: { display: true, text: '내신 등급', font: { weight: 'bold' } }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { font: { family: 'Pretendard', weight: 'bold', size: 14 } }
-                    }
+                        {
+                            label: '최종 합격 컷(최저)',
+                            data: data.map(d => d.min),
+                            backgroundColor: redGrad,
+                            borderRadius: 12,
+                            barPercentage: 0.5,
+                        }
+                    ]
                 },
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        align: 'end',
-                        labels: { usePointStyle: true, font: { family: 'Pretendard', weight: 'bold' } }
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'x',
+                    scales: {
+                        y: {
+                            reverse: true,
+                            min: 1,
+                            max: 4.5,
+                            grid: { color: '#f1f5f9' },
+                            ticks: {
+                                font: { family: 'Pretendard', weight: 'bold' },
+                                stepSize: 0.5
+                            },
+                            title: { display: true, text: '내신 등급', font: { weight: 'bold' } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: 'Pretendard', weight: 'bold', size: 14 } }
+                        }
                     },
-                    tooltip: {
-                        backgroundColor: '#1e293b',
-                        padding: 16,
-                        titleFont: { size: 16, weight: 'bold' },
-                        bodyFont: { size: 14 },
-                        cornerRadius: 12,
-                        callbacks: {
-                            label: (context) => ` ${context.dataset.label}: ${context.raw}등급`
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            align: 'end',
+                            labels: { usePointStyle: true, font: { family: 'Pretendard', weight: 'bold' } }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1e293b',
+                            padding: 16,
+                            titleFont: { size: 16, weight: 'bold' },
+                            bodyFont: { size: 14 },
+                            cornerRadius: 12,
+                            callbacks: {
+                                label: (context) => ` ${context.dataset.label}: ${context.raw}등급`
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        };
     </script>
 </body>
 </html>
