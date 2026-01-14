@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>'케이팝 데몬 헌터스' 신드롬 심층 분석 보고서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@100;400;700;900&display=swap');
+        
+        body {
+            font-family: 'Pretendard', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #f472b6 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-link.active {
+            color: #db2777;
+            border-bottom: 2px solid #db2777;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+
+        .bar-container {
+            height: 24px;
+            background: #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Floating Home/Top Button */
+        #back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Home Logo Link -->
+            <a href="#" class="flex items-center space-x-2 group cursor-pointer" onclick="scrollToTop(event)">
+                <i class="fas fa-ghost text-pink-600 text-2xl group-hover:scale-110 transition-transform"></i>
+                <span class="font-black text-xl tracking-tighter">K-DEMON REPORT</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="nav-link font-bold text-sm hover:text-pink-600 transition-colors" onclick="switchTab('overview')">성과 분석</a>
+                <a href="#culture" class="nav-link font-bold text-sm hover:text-pink-600 transition-colors" onclick="switchTab('culture')">문화적 원천</a>
+                <a href="#industry" class="nav-link font-bold text-sm hover:text-pink-600 transition-colors" onclick="switchTab('industry')">산업적 파급</a>
+                <a href="#strategy" class="nav-link font-bold text-sm hover:text-pink-600 transition-colors" onclick="switchTab('strategy')">전략적 과제</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Back to Top/Home Button -->
+    <button id="back-to-top" onclick="scrollToTop(event)" class="bg-pink-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-pink-700 transition-all flex items-center justify-center">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header id="hero" class="relative pt-32 pb-20 px-6 text-center overflow-hidden">
+        <div class="absolute inset-0 -z-10 bg-gradient-to-br from-pink-50 via-white to-blue-50 opacity-70"></div>
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block py-1 px-3 bg-pink-100 text-pink-600 rounded-full text-xs font-bold mb-4">TREND ANALYSIS 2024</span>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+                '케이팝 데몬 헌터스'<br/>
+                <span class="gradient-text">신드롬 심층 분석</span>
+            </h1>
+            <p class="text-lg text-gray-600 leading-relaxed mb-10">
+                넷플릭스를 통해 공개된 애니메이션이 어떻게 글로벌 문화 지형을 재편했는가.<br class="hidden md:block"/>
+                K팝과 전통 서사가 빚어낸 전례 없는 문화 현상을 탐구합니다.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="stat-card bg-white p-4 rounded-2xl shadow-sm border border-gray-100 w-40">
+                    <div class="text-pink-600 font-black text-2xl">40+</div>
+                    <div class="text-xs text-gray-400 font-bold uppercase tracking-widest">Global Top 1</div>
+                </div>
+                <div class="stat-card bg-white p-4 rounded-2xl shadow-sm border border-gray-100 w-40">
+                    <div class="text-indigo-600 font-black text-2xl">#2</div>
+                    <div class="text-xs text-gray-400 font-bold uppercase tracking-widest">Billboard 200</div>
+                </div>
+                <div class="stat-card bg-white p-4 rounded-2xl shadow-sm border border-gray-100 w-40">
+                    <div class="text-amber-500 font-black text-2xl">95%</div>
+                    <div class="text-xs text-gray-400 font-bold uppercase tracking-widest">Rotten Tomatoes</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        
+        <!-- Tab Navigation for Sections -->
+        <div id="main-content" class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 mb-20">
+            <div class="flex border-b overflow-x-auto bg-gray-50/50 scrollbar-hide">
+                <button onclick="switchTab('overview')" class="tab-btn active flex-1 py-5 px-6 font-bold text-sm whitespace-nowrap border-b-2 border-pink-600 text-pink-600 bg-white transition-all">
+                    1. 글로벌 흥행 성과
+                </button>
+                <button onclick="switchTab('culture')" class="tab-btn flex-1 py-5 px-6 font-bold text-sm whitespace-nowrap border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all">
+                    2. 창의적 재해석
+                </button>
+                <button onclick="switchTab('industry')" class="tab-btn flex-1 py-5 px-6 font-bold text-sm whitespace-nowrap border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all">
+                    3. 산업적 파급 효과
+                </button>
+                <button onclick="switchTab('strategy')" class="tab-btn flex-1 py-5 px-6 font-bold text-sm whitespace-nowrap border-b-2 border-transparent text-gray-400 hover:text-gray-600 transition-all">
+                    4. 소프트 파워 & 과제
+                </button>
+            </div>
+
+            <div class="p-8 md:p-12">
+                <!-- Tab: Overview -->
+                <section id="overview" class="tab-content active">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div>
+                            <h3 class="text-3xl font-black mb-6 flex items-center gap-3">
+                                <i class="fas fa-chart-line text-pink-600"></i> 숫자로 보는 압도적 성과
+                            </h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-bold text-gray-700">빌보드 핫 100 순위 ('Golden')</span>
+                                        <span class="font-black text-pink-600">6위</span>
+                                    </div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill bg-pink-500" style="width: 94%"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-400 mt-1">*가상 아티스트 최초의 역사적 기록</p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="font-bold text-gray-700">로튼 토마토 신선도 지수</span>
+                                        <span class="font-black text-indigo-600">95%</span>
+                                    </div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill bg-indigo-500" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
+                                    <h4 class="font-bold mb-3 text-pink-700 underline decoration-pink-300">핵심 성공 동력: 팬덤 매니지먼트</h4>
+                                    <p class="text-sm text-gray-600 leading-relaxed">
+                                        블랙핑크, BTS 등 실제 그룹을 오마주한 '헌트릭스'와 '사자보이즈' 설정으로 초기 몰입도를 확보했습니다. 특히 차은우의 댄스 챌린지, 트와이스의 OST 참여 등 <strong>현실과 가상을 잇는 바이럴 전략</strong>이 유효했습니다.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="p-8 bg-pink-50 rounded-3xl border border-pink-100 italic text-gray-700 leading-relaxed relative">
+                                <i class="fas fa-quote-left absolute -top-4 -left-2 text-pink-200 text-4xl"></i>
+                                "매력적이고 유머러스하며, 아주 독창적인 전통 문화로 독창적인 세계관을 선사했다"
+                                <div class="mt-4 font-bold text-pink-600 text-right">— 뉴욕 타임스</div>
+                            </div>
+                            <div class="mt-8 flex gap-4">
+                                <div class="flex-1 bg-white p-4 rounded-2xl border border-gray-100 shadow-sm text-center">
+                                    <i class="fas fa-music text-blue-500 mb-2"></i>
+                                    <div class="text-lg font-black italic">Next 'Frozen'</div>
+                                    <div class="text-xs text-gray-400">음악적 완성도 극찬</div>
+                                </div>
+                                <div class="flex-1 bg-white p-4 rounded-2xl border border-gray-100 shadow-sm text-center">
+                                    <i class="fas fa-video text-red-500 mb-2"></i>
+                                    <div class="text-lg font-black">40 Countries</div>
+                                    <div class="text-xs text-gray-400">Netflix Global #1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Culture -->
+                <section id="culture" class="tab-content">
+                    <h3 class="text-3xl font-black mb-8 text-center">한국 전통문화의 창의적 재해석</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-indigo-50 p-6 rounded-3xl border border-indigo-100">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white mb-4">
+                                <i class="fas fa-dragon"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">호작도(까치호랑이)</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                조선 민화 속 벽사의 상징을 귀여우면서도 신비로운 캐릭터로 재창조하여 글로벌 팬덤의 중심에 세웠습니다.
+                            </p>
+                        </div>
+                        <div class="bg-pink-50 p-6 rounded-3xl border border-pink-100">
+                            <div class="w-12 h-12 bg-pink-600 rounded-2xl flex items-center justify-center text-white mb-4">
+                                <i class="fas fa-mask"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">저승사자와 무당</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                '사자보이즈'와 '헌트릭스'로 재탄생한 퇴마 서사. 갓과 도포를 입고 소화하는 현대적 안무가 압권입니다.
+                            </p>
+                        </div>
+                        <div class="bg-amber-50 p-6 rounded-3xl border border-amber-100">
+                            <div class="w-12 h-12 bg-amber-600 rounded-2xl flex items-center justify-center text-white mb-4">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">코리아 리얼리즘</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                수저 밑 휴지 깔기, 컵라면과 김밥, 한의원 방문 등 지극히 일상적인 한국의 디테일이 현실감을 부여했습니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-10 bg-gray-900 rounded-3xl p-8 text-white">
+                        <h4 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <i class="fas fa-map-marked-alt text-pink-500"></i> '서울다운 서울'의 구현
+                        </h4>
+                        <p class="text-gray-400 leading-relaxed">
+                            제작진은 빌딩 숲과 산이 어우러진 독창적인 서울의 풍경을 담아내기 위해 노력했습니다. 
+                            이는 뉴욕이나 도쿄와는 차별화된 독보적인 공간적 정체성을 구축하는 데 성공했습니다.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Tab: Industry -->
+                <section id="industry" class="tab-content">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div class="order-2 lg:order-1">
+                            <div class="bg-white p-8 rounded-3xl border border-emerald-100 shadow-sm relative overflow-hidden">
+                                <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -z-10"></div>
+                                <h3 class="text-2xl font-black mb-6 text-emerald-700">굿즈 시장의 폭발적 성장</h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-3">
+                                        <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                        <div>
+                                            <span class="font-bold">국립중앙박물관 '호작도 배지':</span>
+                                            <span class="text-sm text-gray-600"> 4차 완판 기록, 예약 대기 폭주.</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                        <div>
+                                            <span class="font-bold">온라인 쇼핑몰 트래픽:</span>
+                                            <span class="text-sm text-gray-600"> 하루 최대 50만 명 방문 기록.</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                        <div>
+                                            <span class="font-bold">관광 시너지:</span>
+                                            <span class="text-sm text-gray-600"> 박물관 관람객 270만 명 돌파 (20년 만의 최다).</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mt-6 bg-blue-600 p-8 rounded-3xl text-white">
+                                <h4 class="font-black text-xl mb-3">Agile Cultural Marketing</h4>
+                                <p class="text-sm text-blue-100 leading-relaxed">
+                                    삼성전자는 팬들의 패러디에 발 빠르게 대응하여 '세 개의 눈을 가진 까치'를 광고에 활용했습니다. 유저 콘텐츠를 영리하게 활용한 기민한 마케팅의 정점입니다.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="order-1 lg:order-2 flex flex-col justify-center">
+                            <h3 class="text-3xl font-black mb-6">산업 지형의 변화</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                '케이팝 데몬 헌터스'는 단순히 감상하는 콘텐츠를 넘어 현실 경제에 실질적인 활력을 불어넣고 있습니다. 박물관 굿즈의 품절 대란과 기업들의 자발적인 협업은 IP가 가진 무한한 확장성을 보여줍니다.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-6 bg-emerald-50 rounded-2xl text-center">
+                                    <div class="text-xs text-emerald-600 font-bold mb-1">굿즈 수요</div>
+                                    <div class="text-2xl font-black text-emerald-800">품절 대란</div>
+                                </div>
+                                <div class="p-6 bg-blue-50 rounded-2xl text-center">
+                                    <div class="text-xs text-blue-600 font-bold mb-1">기업 협업</div>
+                                    <div class="text-2xl font-black text-blue-800">삼성전자 등</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tab: Strategy -->
+                <section id="strategy" class="tab-content">
+                    <div class="max-w-3xl mx-auto">
+                        <div class="text-center mb-12">
+                            <h3 class="text-3xl font-black mb-4">소프트 파워의 가치와 전략적 과제</h3>
+                            <p class="text-gray-500 font-bold uppercase tracking-widest text-xs">Soft Power & Future Strategy</p>
+                        </div>
+                        
+                        <div class="space-y-8">
+                            <div class="flex gap-6 items-start">
+                                <div class="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-globe-asia text-pink-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">주류 문화로 편입된 한국의 서사</h4>
+                                    <p class="text-gray-600 leading-relaxed text-sm">
+                                        한국의 전통문화가 이제 '사이드 메뉴'가 아닌 주류 문화의 '메인 메뉴'로 당당히 자리 잡았습니다. 외교 현장에서도 대화 소재로 활용될 만큼 강력한 국가 브랜드 자산이 되었습니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-6 items-start">
+                                <div class="w-14 h-14 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-exclamation-triangle text-indigo-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2 text-indigo-900">성공의 역설: "기분만 좋은 성공?"</h4>
+                                    <p class="text-gray-600 leading-relaxed text-sm">
+                                        소니 픽처스 제작, 넷플릭스 배급이라는 환경은 창의적 자유를 주었지만, 동시에 "한국 IP로 돈은 외국 자본이 벌어간다"는 수익 구조의 한계를 드러냈습니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="mt-12 p-8 bg-gradient-to-r from-pink-600 to-indigo-600 rounded-3xl text-white">
+                                <h4 class="text-2xl font-black mb-4 text-center">전략적 제언: '한류 3.0'을 위한 로드맵</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-bold">
+                                    <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                                        <i class="fas fa-file-contract mb-2 block"></i> IP 공동 소유 및 소유권 확보
+                                    </div>
+                                    <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                                        <i class="fas fa-handshake mb-2 block"></i> 수익 연동형 비즈니스 모델 설계
+                                    </div>
+                                    <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                                        <i class="fas fa-users-cog mb-2 block"></i> 글로벌 제작 역량 내재화
+                                    </div>
+                                    <div class="bg-white/10 p-4 rounded-xl border border-white/20">
+                                        <i class="fas fa-rocket mb-2 block"></i> 독자적인 유통 플랫폼 경쟁력 강화
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Footer / Closing -->
+        <footer class="text-center py-20">
+            <h2 class="text-2xl font-black mb-6">대한민국 콘텐츠 산업의 다음 장을 열다</h2>
+            <div class="flex justify-center gap-6 text-gray-400">
+                <i class="fab fa-facebook hover:text-pink-600 cursor-pointer"></i>
+                <i class="fab fa-instagram hover:text-pink-600 cursor-pointer"></i>
+                <i class="fab fa-twitter hover:text-pink-600 cursor-pointer"></i>
+                <i class="fas fa-link hover:text-pink-600 cursor-pointer"></i>
+            </div>
+            <p class="mt-10 text-xs text-gray-400 font-medium">© 2024 TREND ANALYST. ALL RIGHTS RESERVED.</p>
+        </footer>
+    </main>
+
+    <script>
+        // Smooth scroll to top function
+        function scrollToTop(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Tab switching logic
+        function switchTab(tabId) {
+            // Update buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(tabId)) {
+                    btn.classList.add('active', 'border-pink-600', 'text-pink-600', 'bg-white');
+                    btn.classList.remove('border-transparent', 'text-gray-400');
+                } else {
+                    btn.classList.remove('active', 'border-pink-600', 'text-pink-600', 'bg-white');
+                    btn.classList.add('border-transparent', 'text-gray-400');
+                }
+            });
+
+            // Update content
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                if (content.id === tabId) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Re-animate bars if Overview tab is selected
+            if(tabId === 'overview') {
+                animateBars();
+            }
+        }
+
+        function animateBars() {
+            const bars = document.querySelectorAll('.bar-fill');
+            bars.forEach(bar => {
+                const targetWidth = bar.parentElement.nextElementSibling ? "95%" : "94%"; 
+                // Note: Simple logic to re-trigger animation
+                const currentWidth = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = currentWidth || targetWidth;
+                }, 100);
+            });
+        }
+
+        // Navbar & Back to Top scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const topBtn = document.getElementById('back-to-top');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'py-2');
+                navbar.classList.add('py-4');
+            }
+
+            // Show/Hide Floating Button
+            if (window.scrollY > 300) {
+                topBtn.style.display = 'flex';
+            } else {
+                topBtn.style.display = 'none';
+            }
+        });
+
+        // Simple animation on load
+        window.onload = () => {
+            animateBars();
+        };
+    </script>
+</body>
+</html>
