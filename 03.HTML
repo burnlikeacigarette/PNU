@@ -14,13 +14,44 @@
         .card { background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: transform 0.2s; }
         .card:hover { transform: translateY(-4px); }
         .stat-value { font-weight: 700; color: #1e40af; }
+        
+        /* 홈 버튼 스타일 커스텀 */
+        .home-btn {
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            display: flex;
+            items-center: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+        .home-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-3px);
+        }
     </style>
 </head>
 <body class="text-slate-800">
 
     <!-- Header -->
-    <header class="gradient-bg text-white py-12 px-6 text-center">
-        <div class="max-w-4xl mx-auto">
+    <header class="gradient-bg text-white py-12 px-6 text-center relative">
+        <!-- 홈으로 버튼 -->
+        <a href="index.html" class="home-btn">
+            <i class="fas fa-arrow-left"></i>
+            <span class="hidden sm:inline">홈으로</span>
+            <i class="fas fa-home sm:hidden"></i>
+        </a>
+
+        <div class="max-w-4xl mx-auto mt-4">
             <span class="bg-blue-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Future Report 2030</span>
             <h1 class="text-3xl md:text-5xl font-bold mt-4 mb-6">대한민국 인터넷 이용 실태 및<br>2030 미래 전망 보고서</h1>
             <p class="text-slate-300 text-lg">데이터로 보는 디지털 대한민국, 현재의 성숙과 미래의 완전 포화</p>
