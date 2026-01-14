@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>빅데이터 분석 포트폴리오</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 버전을 최신 6.5.1로 업데이트하여 아이콘 호환성 확보 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: 귀여운 제목용 'Jua'와 본문용 'Noto Sans KR' -->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Tailwind 다크모드 설정 활성화
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-pink': '#FFD1D1',
+                        'cute-pink': '#FF9EAA',
+                        'hot-pink': '#FF7396',
+                        'deep-pink': '#F55C7A',
+                        'dark-bg': '#1A1A1A',
+                        'dark-card': '#2D2D2D',
+                    },
+                    fontFamily: {
+                        'heading': ['Jua', 'sans-serif'],
+                        'body': ['Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1, h2, h3, .nav-item {
+            font-family: 'Jua', sans-serif;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px -5px rgba(255, 115, 150, 0.4);
+        }
+        .blob {
+            position: absolute;
+            filter: blur(40px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="scroll-smooth bg-[#FFF9FA] text-[#4A4A4A] dark:bg-dark-bg dark:text-gray-200">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-dark-bg/80 backdrop-blur-md shadow-sm border-b border-pink-100 dark:border-pink-900/30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-pie text-hot-pink text-2xl"></i>
+                    <span class="text-2xl text-deep-pink font-heading">Data Portfolio</span>
+                </div>
+                <div class="flex items-center space-x-4 md:space-x-8">
+                    <div class="hidden md:flex space-x-6">
+                        <a href="#home" class="nav-item text-gray-600 dark:text-gray-300 hover:text-hot-pink px-2 py-2 rounded-md text-lg transition">홈</a>
+                        <a href="#about" class="nav-item text-gray-600 dark:text-gray-300 hover:text-hot-pink px-2 py-2 rounded-md text-lg transition">소개</a>
+                        <a href="#projects" class="nav-item text-gray-600 dark:text-gray-300 hover:text-hot-pink px-2 py-2 rounded-md text-lg transition">프로젝트</a>
+                        <a href="#contact" class="nav-item text-gray-600 dark:text-gray-300 hover:text-hot-pink px-2 py-2 rounded-md text-lg transition">연락처</a>
+                    </div>
+                    <!-- 다크모드 토글 버튼 -->
+                    <button id="theme-toggle" class="p-2 rounded-full bg-pink-50 dark:bg-pink-900/20 text-hot-pink hover:bg-pink-100 dark:hover:bg-pink-900/40 transition-all duration-300">
+                        <i id="theme-toggle-icon" class="fa-solid fa-moon text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="blob bg-soft-pink w-64 h-64 rounded-full top-0 left-0 -ml-10 mt-10"></div>
+        <div class="blob bg-cute-pink w-72 h-72 rounded-full bottom-0 right-0 -mr-10 mb-10 animation-delay-2000"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-pink-100 dark:bg-pink-900/30 text-hot-pink text-sm font-semibold mb-4 border border-pink-200 dark:border-pink-800/30">
+                빅데이터 분석 수료 🎓
+            </span>
+            <!-- '데이터 분석가 조진경' 부분의 굵기를 다시 주변과 동일한 font-medium(500)으로 맞춤 -->
+            <h1 class="text-4xl md:text-6xl font-medium text-gray-800 dark:text-white mb-6 leading-tight">
+                데이터로 세상을 읽는<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-hot-pink to-deep-pink font-medium">데이터 분석가 조진경</span>의 기록
+            </h1>
+            <!-- break-keep을 추가하여 단어 중간에서 잘리지 않고 '다.'가 윗줄에 붙도록 유도 -->
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-400 font-body break-keep">
+                안녕하세요! <strong>부산진여자고등학교 조진경</strong>입니다.<br>
+                킥보드 사고 분석부터 AI 윤리까지, 데이터 속에 숨겨진 이야기를 찾아내고 있습니다.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#projects" class="px-8 py-3 border border-transparent text-lg font-medium rounded-full text-white bg-hot-pink hover:bg-deep-pink shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 font-heading">
+                    프로젝트 보러가기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white dark:bg-dark-card border-y border-pink-50 dark:border-pink-900/20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 font-heading">📌 어떤 공부를 했나요?</h2>
+                <div class="w-24 h-1 bg-hot-pink mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 rounded-2xl bg-pink-50 dark:bg-dark-bg border border-pink-100 dark:border-pink-900/20">
+                    <div class="w-16 h-16 bg-white dark:bg-dark-card rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm text-3xl">
+                        🐼
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-deep-pink">Python & Pandas</h3>
+                    <p class="text-gray-600 dark:text-gray-400">데이터 전처리 및<br>구조화 능력 습득</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-pink-50 dark:bg-dark-bg border border-pink-100 dark:border-pink-900/20">
+                    <div class="w-16 h-16 bg-white dark:bg-dark-card rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm text-3xl">
+                        📊
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-deep-pink">Data Visualization</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Seaborn & Matplotlib을<br>이용한 시각화</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-pink-50 dark:bg-dark-bg border border-pink-100 dark:border-pink-900/20">
+                    <div class="w-16 h-16 bg-white dark:bg-dark-card rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm text-3xl">
+                        🤝
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-deep-pink">Team Collaboration</h3>
+                    <p class="text-gray-600 dark:text-gray-400">조별 프로젝트를 통한<br>협업 및 인사이트 도출</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gradient-to-b from-white to-pink-50 dark:from-dark-bg dark:to-dark-card">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 font-heading">📂 프로젝트 갤러리</h2>
+                <p class="text-gray-500 dark:text-gray-400">이미지를 클릭하면 상세 분석 페이지로 이동합니다.</p>
+                <div class="w-24 h-1 bg-hot-pink mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 01: 킥보드 -->
+                <a href="01.HTML" class="block group">
+                    <div class="bg-white dark:bg-dark-card rounded-3xl overflow-hidden shadow-md card-hover border border-pink-100 dark:border-pink-900/30 relative h-full flex flex-col">
+                        <div class="absolute top-4 right-4 bg-cute-pink text-white text-xs font-bold px-3 py-1 rounded-full z-10">개인</div>
+                        <div class="h-48 bg-pink-100 dark:bg-pink-900/20 flex items-center justify-center relative overflow-hidden group-hover:bg-pink-200 dark:group-hover:bg-pink-900/40 transition">
+                            <i class="fa-solid fa-person-biking text-6xl text-hot-pink opacity-80 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 font-heading group-hover:text-deep-pink">🛴 킥보드 교통사고 분석</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">개인형 이동장치 사고율 증가 원인 및 안전 대책을 데이터로 분석했습니다.</p>
+                            <span class="text-hot-pink text-sm font-bold flex items-center">
+                                자세히 보기 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 02: 지구온난화 -->
+                <a href="02.HTML" class="block group">
+                    <div class="bg-white dark:bg-dark-card rounded-3xl overflow-hidden shadow-md card-hover border border-pink-100 dark:border-pink-900/30 relative h-full flex flex-col">
+                        <div class="absolute top-4 right-4 bg-cute-pink text-white text-xs font-bold px-3 py-1 rounded-full z-10">개인</div>
+                        <div class="h-48 bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center relative overflow-hidden group-hover:bg-blue-200 dark:group-hover:bg-blue-900/40 transition">
+                            <i class="fa-solid fa-temperature-full text-6xl text-blue-500 opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 font-heading group-hover:text-deep-pink">🌍 지구온난화 분석</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">기온 변화 데이터와 탄소 배출량의 상관관계를 시각화하여 분석했습니다.</p>
+                            <span class="text-hot-pink text-sm font-bold flex items-center">
+                                자세히 보기 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 03: 인터넷 이용자수 -->
+                <a href="03.HTML" class="block group">
+                    <div class="bg-white dark:bg-dark-card rounded-3xl overflow-hidden shadow-md card-hover border border-pink-100 dark:border-pink-900/30 relative h-full flex flex-col">
+                        <div class="absolute top-4 right-4 bg-purple-400 text-white text-xs font-bold px-3 py-1 rounded-full z-10">조별</div>
+                        <div class="h-48 bg-purple-100 dark:bg-purple-900/20 flex items-center justify-center relative overflow-hidden group-hover:bg-purple-200 dark:group-hover:bg-purple-900/40 transition">
+                            <i class="fa-solid fa-globe text-6xl text-purple-400 opacity-80 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 font-heading group-hover:text-deep-pink">💻 인터넷 이용자수 분석</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">전 세계 및 국내 인터넷 보급률과 이용 행태 변화를 팀원들과 함께 분석했습니다.</p>
+                            <span class="text-hot-pink text-sm font-bold flex items-center">
+                                자세히 보기 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 04: 대학별 컴공과 -->
+                <a href="04.HTML" class="block group">
+                    <div class="bg-white dark:bg-dark-card rounded-3xl overflow-hidden shadow-md card-hover border-2 border-hot-pink relative h-full flex flex-col transform md:-translate-y-2">
+                        <div class="absolute top-0 right-0 bg-hot-pink text-white text-xs font-bold px-4 py-1 rounded-bl-xl z-10">★ 진로 핵심</div>
+                         <div class="absolute top-4 right-16 bg-cute-pink text-white text-xs font-bold px-3 py-1 rounded-full z-10">개인</div>
+                        <div class="h-48 bg-yellow-100 dark:bg-yellow-900/20 flex items-center justify-center relative overflow-hidden group-hover:bg-yellow-200 dark:group-hover:bg-yellow-900/40 transition">
+                            <i class="fa-solid fa-graduation-cap text-6xl text-yellow-500 opacity-80 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 font-heading group-hover:text-deep-pink">🎓 대학별 컴공과 등급 분석</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">진로와 직접 연관된 주요 대학 컴퓨터공학과의 입시 결과 및 등급 컷을 심층 분석했습니다.</p>
+                            <span class="text-hot-pink text-sm font-bold flex items-center">
+                                자세히 보기 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
+                 <!-- Project 05: AI 윤리 유튜브 -->
+                 <a href="05.HTML" class="block group">
+                    <div class="bg-white dark:bg-dark-card rounded-3xl overflow-hidden shadow-md card-hover border border-pink-100 dark:border-pink-900/30 relative h-full flex flex-col">
+                        <div class="absolute top-4 right-4 bg-purple-400 text-white text-xs font-bold px-3 py-1 rounded-full z-10">조별</div>
+                        <div class="h-48 bg-red-100 dark:bg-red-900/20 flex items-center justify-center relative overflow-hidden group-hover:bg-red-200 dark:group-hover:bg-red-900/40 transition">
+                            <i class="fa-brands fa-youtube text-6xl text-red-500 opacity-80 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 font-heading group-hover:text-deep-pink">🤖 AI 윤리 유튜브 분석</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">AI 윤리 관련 유튜브 콘텐츠의 댓글 긍/부정 반응과 조회수 추이를 분석했습니다.</p>
+                            <span class="text-hot-pink text-sm font-bold flex items-center">
+                                자세히 보기 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Placeholder / Summary Card -->
+                <div class="bg-pink-50 dark:bg-dark-card rounded-3xl overflow-hidden border border-pink-200 dark:border-pink-900/30 border-dashed relative h-full flex flex-col items-center justify-center p-6 text-center">
+                    <div class="w-16 h-16 bg-white dark:bg-dark-bg rounded-full flex items-center justify-center mb-4 text-2xl animate-bounce">
+                        ✨
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-600 dark:text-gray-300 mb-2 font-heading">Next Project</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">앞으로 더 멋진 데이터 분석<br>프로젝트로 채워나갈 예정입니다!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white dark:bg-dark-bg transition-colors">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-heading">📩 Contact Me</h2>
+            
+            <div class="bg-soft-pink/30 dark:bg-pink-900/10 p-10 rounded-3xl inline-block shadow-sm border border-pink-100 dark:border-pink-900/20">
+                <p class="text-xl font-medium text-deep-pink font-heading mb-6">부산진여자고등학교 조진경</p>
+                
+                <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 font-body">
+                    데이터에 대한 열정으로 가득 찬 분석가입니다.<br>
+                    프로젝트에 대해 궁금한 점이 있다면 언제든 연락주세요!
+                </p>
+                
+                <div class="flex justify-center gap-6">
+                    <button onclick="showEmail()" class="w-12 h-12 bg-white dark:bg-dark-card rounded-full flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-hot-pink hover:scale-110 transition shadow-sm cursor-pointer" title="이메일 주소 보기">
+                        <i class="fa-solid fa-envelope text-xl"></i>
+                    </button>
+                    <a href="https://github.com/burnlikeacigarette" target="_blank" class="w-12 h-12 bg-white dark:bg-dark-card rounded-full flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white hover:scale-110 transition shadow-sm">
+                        <i class="fa-brands fa-github text-xl"></i>
+                    </a>
+                </div>
+                
+                <p id="email-text" class="mt-4 text-lg font-medium text-deep-pink hidden animate-bounce">
+                    cherishhhhh147@gmail.com
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-50 dark:bg-dark-card py-8 border-t border-gray-100 dark:border-pink-900/20 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-400 dark:text-gray-500 text-sm">
+            <p>&copy; 2024 Big Data Analysis Portfolio. All rights reserved.</p>
+            <p class="mt-2">Designed with <i class="fa-solid fa-heart text-pink-400"></i> by You</p>
+        </div>
+    </footer>
+
+    <script>
+        // 테마 설정 (로컬 스토리지 사용)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleIcon = document.getElementById('theme-toggle-icon');
+        const htmlElement = document.documentElement;
+
+        // 초기 테마 로드
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            themeToggleIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeToggleIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggleIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // 스크롤 애니메이션
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 이메일 표시 함수
+        function showEmail() {
+            const emailText = document.getElementById('email-text');
+            emailText.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
